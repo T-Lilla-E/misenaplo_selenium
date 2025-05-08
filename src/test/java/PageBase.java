@@ -9,9 +9,17 @@ public class PageBase {
     private WebDriver driver;
     private WebDriverWait wait;
 
+    private String[] urls;
+
     public PageBase(WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 10);
+    }
+
+    public PageBase(WebDriver driver, String[] urls){
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, 10);
+        this.urls = urls;
     }
 
     protected WebElement waitAndReturnElement(By locator){
