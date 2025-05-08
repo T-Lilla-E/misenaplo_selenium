@@ -1,0 +1,26 @@
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+public class SeleniumTest {
+    
+    private WebDriver driver;
+
+    @Before
+    public void setup() throws MalformedURLException {
+        ChromeOptions options = new ChromeOptions();
+        this.driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+    }
+
+    @After
+    public void close() {
+        if(this.driver != null){
+            this.driver.quit();
+        }
+    }
+}
