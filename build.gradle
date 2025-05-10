@@ -8,6 +8,7 @@ repositories {
 
 dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+    implementation group: 'org.testng', name: 'testng', version: '7.11.0'
     testImplementation 'org.seleniumhq.selenium:selenium-java:2.52.0'
     testImplementation 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
     testImplementation('junit:junit:4.12'){
