@@ -6,8 +6,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
     
-    private WebDriver driver;
-    private WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+
+    protected By bodyLocator = By.tagName("body");
 
     private String[] urls;
 
@@ -16,14 +18,19 @@ public class PageBase {
         this.wait = new WebDriverWait(driver, 10);
     }
 
-    public PageBase(WebDriver driver, String[] urls){
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
-        this.urls = urls;
-    }
+    // public PageBase(WebDriver driver, String[] urls){
+    //     this.driver = driver;
+    //     this.wait = new WebDriverWait(driver, 10);
+    //     this.urls = urls;
+    // }
 
     protected WebElement waitAndReturnElement(By locator){
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return this.driver.findElement(locator);
+    }
+
+    public void pressButton(By locator){
+        WebElement buttonElement = waitAndReturnElement(locator);
+        buttonElement.click();
     }
 }
