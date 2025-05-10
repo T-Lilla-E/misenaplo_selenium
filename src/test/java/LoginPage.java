@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends PageBase {
 
-    private By titleLocator = By.xpath("//div[span[contains(., \"Bejelentkezés\")]]");
+    //private By titleLocator = By.xpath("//div[span[contains(., \"Bejelentkezés\")]]");
 
     private By emailInputLocator = By.xpath("//div[label[contains(., \"Email\")]]/input");
     private By passwordInputLocator = By.xpath("//div[label[contains(., \"Jelszó\")]]/input");
@@ -13,14 +13,16 @@ public class LoginPage extends PageBase {
     
     public LoginPage(WebDriver driver){
         super(driver);
+        this.titleLocator = By.xpath("//div[span[contains(., \"Bejelentkezés\")]]");
         this.driver.get("https://misenaplo.hu/login");
         waitAndReturnElement(bodyLocator);
     }
 
-        public String getTitle() {
-        WebElement titleElement = waitAndReturnElement(titleLocator);
-        return titleElement.getText();
-    }
+    // @Override
+    // public String getTitle() {
+    //     WebElement titleElement = waitAndReturnElement(titleLocator);
+    //     return titleElement.getText();
+    // }
 
     public void fillEmailInput(String email){
         WebElement emailInputElement = waitAndReturnElement(emailInputLocator);

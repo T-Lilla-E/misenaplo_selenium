@@ -13,22 +13,21 @@ public class PageBase {
     protected By bodyLocator = By.tagName("body");
     protected By navLocator = By.tagName("nav");
 
-    private String[] urls;
+    protected By titleLocator;
 
     public PageBase(WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 10);
     }
 
-    public PageBase(WebDriver driver, String[] urls){
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
-        this.urls = urls;
-    }
-
     protected WebElement waitAndReturnElement(By locator){
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return this.driver.findElement(locator);
+    }
+
+    protected String getTitle(){
+        WebElement titleElement = waitAndReturnElement(titleLocator);
+        return titleElement.getText();
     }
 
     public void pressButton(By locator){

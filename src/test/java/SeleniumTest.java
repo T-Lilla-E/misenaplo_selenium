@@ -1,3 +1,4 @@
+import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -13,6 +14,10 @@ public class SeleniumTest {
     
     private WebDriver driver;
     // private Map<String, Object> jsonData;
+
+    private final String[] urls = {"/profile", "/groups", "/users", "/parishes", "/scanTask"};
+    private final String[] classNames = {"ProfilePage", "GroupsPage", "UsersPage", "ParishesPage", "ScanPage"};
+    private final String[] pageTitles = {"Felhasználói profil", "Csoportok", "Felhasználók", "Plébániák", "Csoportba rögzítés"}; 
 
     private ProfilePage fillLoginFormAndNavigate(){
         LoginPage loginPage = new LoginPage(this.driver);
@@ -48,6 +53,25 @@ public class SeleniumTest {
         LandingPage landingPage = profilePage.pressLogoutAndNavigate();
         Assert.assertTrue(landingPage.getTitle().contains(("Kezdőlap").toUpperCase()));
     }
+
+    // @Test(dependsOnMethods = {"SuccessfulLogin"})
+    // public void StaticTestOfLoggedInPages(){
+    //     fillLoginFormAndNavigate();
+    //     for (int i =0; i< classNames.length; i++) {
+    //         try{
+    //             Class<?> myClass = Class.forName(classNames[i]);
+    //             Constructor <?> myConstructor = myClass.getConstructor(WebDriver.class);
+    //             Object instance = myConstructor.newInstance(this.driver);
+
+    //             LoggedInPageBase page = (LoggedInPageBase) instance;
+    //             Assert.assertTrue(page.getTitle().contains((pageTitles[i]).toUpperCase()));
+    //         }
+    //         catch(Exception e){
+    //             System.out.println(i);
+    //             e.printStackTrace();
+    //         }
+    //     }
+    // }
 
     @AfterMethod
     public void close() {
