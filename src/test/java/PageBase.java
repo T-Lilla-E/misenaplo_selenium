@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -10,6 +11,7 @@ public class PageBase {
     protected WebDriverWait wait;
 
     protected By bodyLocator = By.tagName("body");
+    protected By navLocator = By.tagName("nav");
 
     private String[] urls;
 
@@ -32,5 +34,13 @@ public class PageBase {
     public void pressButton(By locator){
         WebElement buttonElement = waitAndReturnElement(locator);
         buttonElement.click();
+    }
+
+    public void pressButtonFromSideMenu(By locator){
+        WebElement sidenavMenu = waitAndReturnElement(navLocator);
+        Actions actions = new Actions(this.driver);
+        actions.moveToElement(sidenavMenu).perform();
+        WebElement buttonElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        actions.moveToElement(buttonElement).click().perform();
     }
 }

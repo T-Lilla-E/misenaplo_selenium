@@ -1,25 +1,29 @@
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
 
 public class SeleniumTest {
     
     private WebDriver driver;
     // private Map<String, Object> jsonData;
 
-    @Before
-    public void setup() throws MalformedURLException, IOException, StreamReadException, DatabindException {
+    private ProfilePage fillLoginFormAndNavigate(){
+        LoginPage loginPage = new LoginPage(this.driver);
+        loginPage.fillEmailInput("tle@mailinator.com");
+        loginPage.fillPasswordInput("123456");
+        ProfilePage profilePage = loginPage.pressLoginAndNavigate();
+        return profilePage;
+    }
+
+    @BeforeMethod
+    public void setup() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         this.driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         this.driver.manage().window().maximize();
@@ -34,17 +38,18 @@ public class SeleniumTest {
 
     @Test
     public void SuccessfulLogin(){
-        LoginPage loginPage = new LoginPage(this.driver);
-        Assert.assertTrue(loginPage.getTitle().contains(("Bejelentkezés").toUpperCase()));
-
-        loginPage.fillEmailInput("tle@mailinator.com");
-        loginPage.fillPasswordInput("123456");
-        ProfilePage profilePage = loginPage.pressLoginAndNavigate();
-
+        ProfilePage profilePage = fillLoginFormAndNavigate();
         Assert.assertTrue(profilePage.getTitle().contains(("Felhasználói profil").toUpperCase()));
     }
 
-    @After
+    @Test(dependsOnMethods = {"SuccessfulLogin"})
+    public void Logout(){
+        ProfilePage profilePage = fillLoginFormAndNavigate();
+        LandingPage landingPage = profilePage.pressLogoutAndNavigate();
+        Assert.assertTrue(landingPage.getTitle().contains(("Kezdőlap").toUpperCase()));
+    }
+
+    @AfterMethod
     public void close() {
         if(this.driver != null){
             this.driver.quit();
