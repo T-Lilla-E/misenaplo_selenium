@@ -1,6 +1,5 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class GroupsPage extends LoggedInPageBase {
     
@@ -10,10 +9,4 @@ public class GroupsPage extends LoggedInPageBase {
         this.driver.get("https://misenaplo.hu/groups");
         waitAndReturnElement(bodyLocator);
     }
-
-    // @Override
-    // public String getTitle(){
-    //     WebElement titleElement = waitAndReturnElement(titleLocator);
-    //     return titleElement.getText();
-    // }
 }

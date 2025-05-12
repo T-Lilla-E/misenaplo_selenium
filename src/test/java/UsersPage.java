@@ -9,9 +9,4 @@ public class UsersPage extends LoggedInPageBase {
         this.driver.get("https://misenaplo.hu/users");
         waitAndReturnElement(bodyLocator);
     }
-
-    // @Override
-    // public String getTitle(){
-
-    // }
 }

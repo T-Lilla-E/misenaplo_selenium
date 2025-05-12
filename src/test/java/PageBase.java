@@ -20,7 +20,7 @@ public class PageBase {
         this.wait = new WebDriverWait(driver, 10);
     }
 
-    protected WebElement waitAndReturnElement(By locator){
+    public WebElement waitAndReturnElement(By locator){
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return this.driver.findElement(locator);
     }

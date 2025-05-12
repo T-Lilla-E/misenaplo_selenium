@@ -4,7 +4,13 @@ import org.openqa.selenium.WebElement;
 
 public class LandingPage extends PageBase {
 
-    //private By titleLocator = By.xpath("//div[span[contains(., \"Kezdőlap\")]]");
+    public final String[] locatorsOfLandingPage = {
+        "//div[contains(@style, \"Mirjam\")]", // Mirjam image
+        "//h1[contains(., \"MisEnapló\")]", // application title
+        "//button[span[contains(., \"Bejelentkezés\")]]", // login button
+        "//p[contains(., \"Vörös László\")]", // developer name
+        "//div[contains(@style, \"ikon\")]" // icon 
+    };
     
     public LandingPage(WebDriver driver){
         super(driver);
@@ -13,8 +19,9 @@ public class LandingPage extends PageBase {
         waitAndReturnElement(bodyLocator);
     }
 
-    // public String getTitle(){
-    //     WebElement titleElement = waitAndReturnElement(titleLocator);
-    //     return titleElement.getText();
-    // }
+    public boolean elementDisplayed(String locatorString){
+        By locator = By.xpath(locatorString);
+        WebElement element = waitAndReturnElement(locator);
+        return element.isDisplayed();
+    }
 }

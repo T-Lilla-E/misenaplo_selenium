@@ -9,8 +9,4 @@ public class ParishesPage extends LoggedInPageBase {
         this.driver.get("https://misenaplo.hu/parishes");
         waitAndReturnElement(bodyLocator);
     }
-
-    // public String getTitle(){
-
-    // }
 }

@@ -18,12 +18,6 @@ public class LoginPage extends PageBase {
         waitAndReturnElement(bodyLocator);
     }
 
-    // @Override
-    // public String getTitle() {
-    //     WebElement titleElement = waitAndReturnElement(titleLocator);
-    //     return titleElement.getText();
-    // }
-
     public void fillEmailInput(String email){
         WebElement emailInputElement = waitAndReturnElement(emailInputLocator);
         emailInputElement.sendKeys(email);

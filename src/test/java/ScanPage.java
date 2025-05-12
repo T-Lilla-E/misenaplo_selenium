@@ -9,8 +9,4 @@ public class ScanPage extends LoggedInPageBase {
         this.driver.get("https://misenaplo.hu/scantTask");
         waitAndReturnElement(bodyLocator);
     }
-
-    // public String getTitle(){
-
-    // }
 }
