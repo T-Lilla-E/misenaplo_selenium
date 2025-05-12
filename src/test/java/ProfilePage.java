@@ -6,7 +6,7 @@ public class ProfilePage extends LoggedInPageBase {
     public ProfilePage(WebDriver driver){
         super(driver);
         this.titleLocator = By.xpath("//div[span[contains(., \"Felhasználói profil\")]]");
-        this.driver.get("https://misenaplo.hu/profile");
+        this.driver.get(config.getBaseUrl() + "/profile");
         waitAndReturnElement(bodyLocator);
     }
 }

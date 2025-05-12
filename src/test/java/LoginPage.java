@@ -14,7 +14,7 @@ public class LoginPage extends PageBase {
     public LoginPage(WebDriver driver){
         super(driver);
         this.titleLocator = By.xpath("//div[span[contains(., \"Bejelentkezés\")]]");
-        this.driver.get("https://misenaplo.hu/login");
+        this.driver.get(config.getBaseUrl() + "/login");
         waitAndReturnElement(bodyLocator);
     }
 

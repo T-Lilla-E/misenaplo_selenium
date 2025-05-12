@@ -9,6 +9,7 @@ public class PageBase {
     
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected ConfigReader config;
 
     protected By bodyLocator = By.tagName("body");
     protected By navLocator = By.tagName("nav");
@@ -18,6 +19,7 @@ public class PageBase {
     public PageBase(WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 10);
+        this.config = new ConfigReader();
     }
 
     public WebElement waitAndReturnElement(By locator){

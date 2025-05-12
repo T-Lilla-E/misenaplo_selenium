@@ -15,7 +15,7 @@ public class LandingPage extends PageBase {
     public LandingPage(WebDriver driver){
         super(driver);
         this.titleLocator = By.xpath("//div[span[contains(., \"Kezdőlap\")]]");
-        this.driver.get("https://misenaplo.hu");
+        this.driver.get(config.getBaseUrl());
         waitAndReturnElement(bodyLocator);
     }
 

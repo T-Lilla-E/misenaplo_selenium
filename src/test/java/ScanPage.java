@@ -6,7 +6,7 @@ public class ScanPage extends LoggedInPageBase {
     public ScanPage(WebDriver driver){
         super(driver);
         this.titleLocator = By.xpath("//div[span[contains(., \"Csoportba rögzítés\")]]");
-        this.driver.get("https://misenaplo.hu/scantTask");
+        this.driver.get(config.getBaseUrl() + "/scanTask");
         waitAndReturnElement(bodyLocator);
     }
 }

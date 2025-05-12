@@ -6,7 +6,7 @@ public class ParishesPage extends LoggedInPageBase {
     public ParishesPage(WebDriver driver){
         super(driver);
         this.titleLocator = By.xpath("//div[span[contains(., \"Plébániák\")]]");
-        this.driver.get("https://misenaplo.hu/parishes");
+        this.driver.get(config.getBaseUrl() + "/parishes");
         waitAndReturnElement(bodyLocator);
     }
 }
