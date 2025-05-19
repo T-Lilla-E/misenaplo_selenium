@@ -9,7 +9,7 @@ public class GroupsPage extends LoggedInPageBase {
     private By dialogTitleLocator = By.xpath("//span[contains(., \"Új csoport\")]");
     private By nameInputLocator = By.xpath("//div[.//label[contains(., \"Név\")]]/input");
     private By saveButtonLocator = By.xpath("//button[.//span[contains(., \"Hozzáadás\")]]");
-    private By groupNameLocator = By.xpath("//td[contains(., \"my group\")]");
+    private By groupNameLocator = By.xpath("//td[contains(., \"" + config.getGroupName() + "\")]");
     
     public GroupsPage(WebDriver driver){
         super(driver);
@@ -37,7 +37,7 @@ public class GroupsPage extends LoggedInPageBase {
 
     public void fillNameInput(){
         WebElement inputElement = waitAndReturnElement(nameInputLocator);
-        inputElement.sendKeys("my group");
+        inputElement.sendKeys(config.getGroupName());
     }
 
     public void saveGroup(){

@@ -31,4 +31,8 @@ public class ConfigReader {
     public String getBaseUrl() {
         return properties.getProperty("baseUrl");
     }
+
+    public String getGroupName(){
+        return properties.getProperty("groupName");
+    }
 }
