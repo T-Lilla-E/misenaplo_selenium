@@ -17,11 +17,8 @@ public class SeleniumTest {
 
     private ProfilePage fillLoginFormAndNavigate(){
         LoginPage loginPage = new LoginPage(this.driver);
-        System.out.println(config.getUsername() + " " + config.getPassword() + " " + config.getBaseUrl());
         loginPage.fillEmailInput(config.getUsername());
         loginPage.fillPasswordInput(config.getPassword());
-        // loginPage.fillEmailInput("tle@mailinator.com");
-        // loginPage.fillPasswordInput("123456");
         ProfilePage profilePage = loginPage.pressLoginAndNavigate();
         return profilePage;
     }
@@ -55,6 +52,19 @@ public class SeleniumTest {
         ProfilePage profilePage = fillLoginFormAndNavigate();
         LandingPage landingPage = profilePage.pressLogoutAndNavigate();
         Assert.assertTrue(landingPage.getTitle().contains(("Kezdőlap").toUpperCase()));
+    }
+
+    @Test(dependsOnMethods = {"SuccessfulLogin"})
+    public void FillAddGroupForm(){
+        ProfilePage profilePage = fillLoginFormAndNavigate();
+        GroupsPage groupsPage = profilePage.navigateToGroupsPage();
+        groupsPage.checkCheckbox();
+        groupsPage.clickOnAddButton();
+        Assert.assertTrue(groupsPage.getDialogTitle().contains("Új csoport"));
+        groupsPage.fillNameInput();
+        groupsPage.saveGroup();
+        //Assert.assertTrue(this.driver.getPageSource().contains("my group"));
+        Assert.assertTrue(groupsPage.isGroupNameInList());
     }
 
     @AfterMethod

@@ -5,6 +5,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public abstract class LoggedInPageBase extends PageBase {
 
     protected By logoutLocator = By.xpath("//button[span[contains(., \"Kijelentkezés\")]]");
+
+    protected By groupsLocator = By.xpath("//a[@href=\"/groups\"]");
     
     private By locatorOfMirjam = By.xpath("//h1[contains(., \"Betlehemi Szent Mirjam\")]");
     
@@ -17,5 +19,11 @@ public abstract class LoggedInPageBase extends PageBase {
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locatorOfMirjam));
         //this.wait.until(ExpectedConditions.urlToBe("https://misenaplo.hu"));
         return new LandingPage(this.driver);
+    }
+
+    public GroupsPage navigateToGroupsPage(){
+        pressButtonFromSideMenu(groupsLocator);
+        this.wait.until(ExpectedConditions.urlContains("/groups"));
+        return new GroupsPage(this.driver);
     }
 }
