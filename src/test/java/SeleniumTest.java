@@ -53,20 +53,20 @@ public class SeleniumTest {
         }
     }
 
-    @Test
+    @Test(dependsOnMethods = "ReadingPageTitle")
     public void SuccessfulLogin(){
         ProfilePage profilePage = fillLoginFormAndNavigate();
-        Assert.assertTrue(profilePage.getTitle().contains(("Felhasználói profil").toUpperCase()));
+        Assert.assertTrue(profilePage.getHeadingText().contains(("Felhasználói profil").toUpperCase()));
     }
 
     @Test(dependsOnMethods = {"SuccessfulLogin"})
     public void Logout(){
         ProfilePage profilePage = fillLoginFormAndNavigate();
         LandingPage landingPage = profilePage.pressLogoutAndNavigate();
-        Assert.assertTrue(landingPage.getTitle().contains(("Kezdőlap").toUpperCase()));
+        Assert.assertTrue(landingPage.getHeadingText().contains(("Kezdőlap").toUpperCase()));
     }
 
-    @Test(dependsOnMethods = {"SuccessfulLogin"})
+    @Test(dependsOnMethods = {"SuccessfulLogin", "HoverTestOnMultiplePages"})
     public void FillAddGroupForm(){
         ProfilePage profilePage = fillLoginFormAndNavigate();
         GroupsPage groupsPage = profilePage.navigateToGroupsPage();

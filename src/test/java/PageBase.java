@@ -28,12 +28,12 @@ public class PageBase {
         return this.driver.findElement(locator);
     }
 
-    protected String getTitle(){
+    protected String getHeadingText(){
         WebElement titleElement = waitAndReturnElement(titleLocator);
         return titleElement.getText();
     }
 
-    protected String getTitle2(){
+    protected String getPageTitle(){
         WebElement headTitleElement = waitAndReturnElement(headTitleLocator);
         return headTitleElement.getText();
     }
