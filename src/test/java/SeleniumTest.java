@@ -39,7 +39,13 @@ public class SeleniumTest {
         this.driver.manage().window().maximize();
     }
 
-    @Test()
+    @Test
+    public void ReadingPageTitle(){
+        LandingPage landingPage = new LandingPage(this.driver);
+        Assert.assertTrue(this.driver.getTitle().contains("MisEnapló"));
+    }
+
+    @Test
     public void StaticTestOfLandingPageElements(){
         LandingPage landingPage = new LandingPage(this.driver);
         for (String locatorString : landingPage.locatorsOfLandingPage) {
@@ -81,6 +87,17 @@ public class SeleniumTest {
         Assert.assertTrue(scanPage.hasImage());
         Assert.assertTrue(scanPage.hasDropdown());
         Assert.assertTrue(scanPage.hasFooter());
+    }
+
+    @Test(dependsOnMethods = {"SuccessfulLogin"})
+    public void HoverTestOnMultiplePages(){
+        ProfilePage profilePage = fillLoginFormAndNavigate();
+        GroupsPage groupsPage = profilePage.navigateToGroupsPage();
+        Assert.assertTrue(groupsPage.hoverOnAddButtonShowsTooltip());
+        UsersPage usersPage = profilePage.navigateToUsersPage();
+        Assert.assertTrue(usersPage.hoverOnAddButtonShowsTooltip());
+        ParishesPage parishesPage = usersPage.navigateToParishesPage();
+        Assert.assertTrue(parishesPage.hoverOnAddButtonShowsTooltip());
     }
 
     @AfterMethod

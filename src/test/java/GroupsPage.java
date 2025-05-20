@@ -10,9 +10,9 @@ public class GroupsPage extends LoggedInPageBase {
     private By nameInputLocator = By.xpath("//div[.//label[contains(., \"Név\")]]/input");
     private By saveButtonLocator = By.xpath("//button[.//span[contains(., \"Hozzáadás\")]]");
     private By groupNameLocator = By.xpath("//td[contains(., \"" + config.getGroupName() + "\")]");
-    //private By deleteCreatedGroupLocator = By.xpath("//tr[td[contains(., \"" + config.getGroupName() + "\")]]/td[2]//button[2]");
     private By deleteCreatedGroupLocator = By.xpath("//tr[td[contains(., \"" + config.getGroupName() + "\")]]//i[contains(@class, 'fa-trash')]/ancestor::button");
     private By deleteButtonLocator = By.xpath("//button[span[contains(., \"Törlés\")]]");
+    private By tooltipLocator = By.xpath("//div[contains(@class, \"v-tooltip\") and contains(., \"Hozzáadás\")]");
     
     public GroupsPage(WebDriver driver){
         super(driver);
@@ -26,6 +26,12 @@ public class GroupsPage extends LoggedInPageBase {
         if(!checkboxElement.isSelected()){
             pressButton(checkboxLocator);
         }
+    }
+
+    public boolean hoverOnAddButtonShowsTooltip(){
+        hoverOnElement(addButtonLocator);
+        WebElement tooltip = waitAndReturnElement(tooltipLocator);
+        return tooltip.isDisplayed();
     }
 
     public void clickOnAddButton(){

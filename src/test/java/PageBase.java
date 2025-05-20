@@ -13,6 +13,7 @@ public class PageBase {
 
     protected By bodyLocator = By.tagName("body");
     protected By navLocator = By.tagName("nav");
+    protected By headTitleLocator = By.xpath("//title");
 
     protected By titleLocator;
 
@@ -32,6 +33,11 @@ public class PageBase {
         return titleElement.getText();
     }
 
+    protected String getTitle2(){
+        WebElement headTitleElement = waitAndReturnElement(headTitleLocator);
+        return headTitleElement.getText();
+    }
+
     public void pressButton(By locator){
         WebElement buttonElement = waitAndReturnElement(locator);
         buttonElement.click();
@@ -43,5 +49,11 @@ public class PageBase {
         actions.moveToElement(sidenavMenu).perform();
         WebElement buttonElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
         actions.moveToElement(buttonElement).click().perform();
+    }
+
+    public void hoverOnElement(By locator){
+        WebElement element = waitAndReturnElement(locator);
+        Actions actions = new Actions(this.driver);
+        actions.moveToElement(element).perform();
     }
 }
