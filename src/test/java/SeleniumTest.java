@@ -23,6 +23,12 @@ public class SeleniumTest {
         return profilePage;
     }
 
+    private void deleteGroupAfterAssertion(GroupsPage groupsPage){
+        groupsPage.checkCheckbox();
+        groupsPage.clickBinIcon();
+        groupsPage.clickDeleteButton();
+    }
+
     @BeforeMethod
     public void setup() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
@@ -63,8 +69,18 @@ public class SeleniumTest {
         Assert.assertTrue(groupsPage.getDialogTitle().contains("Új csoport"));
         groupsPage.fillNameInput();
         groupsPage.saveGroup();
-        //Assert.assertTrue(this.driver.getPageSource().contains("my group"));
         Assert.assertTrue(groupsPage.isGroupNameInList());
+        deleteGroupAfterAssertion(groupsPage);
+    }
+
+    @Test(dependsOnMethods = {"SuccessfulLogin"})
+    public void StaticTestOfScanPage(){
+        ProfilePage profilePage = fillLoginFormAndNavigate();
+        ScanPage scanPage = profilePage.navigateToScanPage();
+        Assert.assertTrue(scanPage.hasHeader());
+        Assert.assertTrue(scanPage.hasImage());
+        Assert.assertTrue(scanPage.hasDropdown());
+        Assert.assertTrue(scanPage.hasFooter());
     }
 
     @AfterMethod

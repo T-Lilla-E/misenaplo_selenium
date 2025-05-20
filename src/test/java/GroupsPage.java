@@ -10,6 +10,9 @@ public class GroupsPage extends LoggedInPageBase {
     private By nameInputLocator = By.xpath("//div[.//label[contains(., \"Név\")]]/input");
     private By saveButtonLocator = By.xpath("//button[.//span[contains(., \"Hozzáadás\")]]");
     private By groupNameLocator = By.xpath("//td[contains(., \"" + config.getGroupName() + "\")]");
+    //private By deleteCreatedGroupLocator = By.xpath("//tr[td[contains(., \"" + config.getGroupName() + "\")]]/td[2]//button[2]");
+    private By deleteCreatedGroupLocator = By.xpath("//tr[td[contains(., \"" + config.getGroupName() + "\")]]//i[contains(@class, 'fa-trash')]/ancestor::button");
+    private By deleteButtonLocator = By.xpath("//button[span[contains(., \"Törlés\")]]");
     
     public GroupsPage(WebDriver driver){
         super(driver);
@@ -55,5 +58,15 @@ public class GroupsPage extends LoggedInPageBase {
             shown = false;
         }
         return shown;
+    }
+
+    public void clickBinIcon(){
+        waitAndReturnElement(deleteCreatedGroupLocator);
+        pressButton(deleteCreatedGroupLocator);
+    }
+
+    public void clickDeleteButton(){
+        waitAndReturnElement(deleteButtonLocator);
+        pressButton(deleteButtonLocator);
     }
 }
